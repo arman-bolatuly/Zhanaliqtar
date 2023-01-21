@@ -23,6 +23,7 @@ font-weight: 700;
 
 const PostDetails = styled.View`
 justify-content: center;
+flex: 1;
 `;
 
 const PostDate = styled.Text`
@@ -31,14 +32,21 @@ color: rgba(0, 0, 0, 0.4);
 margin-top: 2px;
 `;
 
-const imageUrl = 'https://www.meme-arsenal.com/memes/d97d8aaf1a3b889eb1c737416bdea21e.jpg';
+const truncateTitle = (str) => {
+  if (str.length >= 50) {
+    return str.substring(0, 50) + '...';
+  }
+
+  return str;
+}
+
 export const Post = ({title, ImageUrl, createdAt}) => {
   return (
     <PostView>
-        <PostImage source={{uri: imageUrl}}/>
+        <PostImage source={{uri: ImageUrl}}/>
         <PostDetails>
           <PostTitle>{title}</PostTitle>
-          <PostDate>{createdAt}</PostDate>
+          <PostDate>{new Date(createdAt).toLocaleDateString()}</PostDate>
         </PostDetails>
       </PostView>
   )
